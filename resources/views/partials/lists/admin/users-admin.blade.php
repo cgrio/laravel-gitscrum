@@ -24,5 +24,10 @@
         <i class="fa {{ $class_avatar }}" aria-hidden="true"></i></a>  {{ $user->provider }}
     </td>
     <td>
+    @if(strtolower($user->provider) == 'local')
+        <a href="/gestao/usuarios/{{$user->id}}/edit" class="btn btn-primary">Editar</a>
+       &nbsp; <a href="/gestao/usuarios/{{$user->id}}/destroy" class="btn btn-danger ml-2">Apagar</a>
+
+   @endif
     </td>
 </tr>

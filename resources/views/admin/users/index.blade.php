@@ -10,6 +10,7 @@
 @endsection
 
 @section('content')
+<a href="/gestao/usuarios/create" class="btn btn-primary">Adicionar Usuário</a>
 
 <div id="user-list" class="tab-pane">
     <div class="panel-body">
