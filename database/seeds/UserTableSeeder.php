@@ -18,12 +18,18 @@ class UserTableSeeder extends Seeder
       $admin->name = 'Admin';
       $admin->email = 'admin@teste.com';
       $admin->password = bcrypt('secret');
+      $admin->active = 1;
+      $admin->provider = 'local';
+      $admin->avatar = '/img/profile.png';
       $admin->save();
       $admin->roles()->attach($role_admin);
       $manager = new User();
       $manager->name = 'Manager Name';
       $manager->email = 'manager@teste.com';
       $manager->password = bcrypt('secret');
+      $manager->active = 1;
+      $manager->avatar = '/img/profile.png';
+      $manager->provider = 'local';
       $manager->save();
       $manager->roles()->attach($role_manager);
     }

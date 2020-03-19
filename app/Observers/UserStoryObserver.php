@@ -14,6 +14,10 @@ class UserStoryObserver
             $userStory->user_id = Auth::user()->id;
         }
 
+        if (!isset($userStory->avatar)) {
+            $userStory->avatar = '/img/avatar.png';
+        }
+
         $userStory->slug = Helper::slug($userStory->title);
     }
 
