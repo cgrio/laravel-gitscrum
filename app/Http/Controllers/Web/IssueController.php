@@ -132,7 +132,7 @@ class IssueController extends Controller
         }
 
         $request->slug = $slug;
-        
+
         resolve('IssueService')->setRequest($request)->updateStatus();
 
         $issue = Issue::slug($slug)->firstOrFail();
@@ -143,8 +143,10 @@ class IssueController extends Controller
             'updated_by' => Auth::user()->slack_username,
             'status' => $status,
         ];
+        if(!empty(Auth::user()->slack_username)){
 
-        $slack->send($content, 2);
+            $slack->send($content, 2);
+        }
 
         return back()->with('success', trans('gitscrum.updated-successfully'));
     }
