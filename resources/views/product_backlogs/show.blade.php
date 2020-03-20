@@ -35,7 +35,8 @@
     <hr />
 
     @include('partials.boxes.note', [ 'list' => $productBacklog, 'type'=> 'product_backlogs',
-        'title' => 'Notes', 'percentage' => Helper::percentage($productBacklog, 'notes')])
+        'title' => 'Notes', 'percentage' => $productBacklog->getPercentage()])
+
 
     @include('partials.boxes.attachment', ['id'=>$productBacklog->id, 'type'=>'product_backlogs', 'list' => $productBacklog->attachments])
 
