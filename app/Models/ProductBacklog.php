@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use GitScrum\Scopes\GlobalScope;
 use GitScrum\Presenters\GlobalPresenter;
+use SebastianBergmann\Diff\LongestCommonSubsequenceCalculator;
 
 class ProductBacklog extends Model
 {
@@ -93,5 +94,20 @@ class ProductBacklog extends Model
     {
         return $this->morphMany(Comment::class, 'commentable')
             ->orderby('created_at', 'DESC');
+    }
+
+    /**
+     * Generate Product Backlog percentage through notes
+     *
+     * @return float
+     */
+    public function getPercentage()
+    {
+        $openedNotesHours = (float) $this->notes()->whereNull('closed_at')->sum('hours');
+        $closedNotesHours = (float) $this->notes()->whereNotNull('closed_at')->sum('hours');
+        $totalHours       = (float) ($closedNotesHours + $openedNotesHours);
+        $percentage       = (float) $totalHours < 1 ? 0 : (($closedNotesHours * 100) / $totalHours);
+
+        return $percentage;
     }
 }
