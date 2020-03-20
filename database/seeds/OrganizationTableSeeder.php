@@ -13,6 +13,7 @@ class OrganizationTableSeeder extends Seeder
     public function run()
     {
       $organization = new Organization();
+      $organization->provider_id = 'local';
       $organization->provider = 'local';
       $organization->username = 'unisuam';
       $organization->title    = 'UNISUAM';
