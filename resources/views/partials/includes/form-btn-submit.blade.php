@@ -1,4 +1,3 @@
-<hr />
 <div class="form-group">
     <div class="pull-right">
         <div class="col-lg-12">

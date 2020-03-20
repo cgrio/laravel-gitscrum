@@ -23,8 +23,8 @@
             @if( $obj->productBacklog->sprints()->count() )
             <select name="sprint_id" class="form-control">
                 @foreach ($obj->productBacklog->sprints()->get() as $sprint)
-                    <option 
-                    	@if(isset($issue->sprint_id) && $issue->sprint_id == $sprint->id) selected="selected" 
+                    <option
+                    	@if(isset($issue->sprint_id) && $issue->sprint_id == $sprint->id) selected="selected"
                     	@elseif(isset($obj->id) && $obj->id == $sprint->id) selected = "selected"
                     	@endif
                         value="{{$sprint->id}}">{{$sprint->title}} - {{$sprint->timebox}}</option>
@@ -86,22 +86,31 @@
     </div>
     <div class="hr-line-dashed"></div>
     <div class="form-group">
-        <label class="col-sm-2">{{trans('gitscrum.planning-pocker')}}</label>
+        <label class="col-sm-2">{{trans('gitscrum.planning-pocker')}}
+            <div style="margin-left: 33px" class="col-sm-1">
+                <div class="i-checks">
+                    <input type="checkbox" value="" checked="">
+                </div>
+            </div>
+        </label>
         <div class="col-sm-3">
-            <div class="i-checks"><input type="checkbox" value="" checked=""> <i></i></div>
-            <span class="help-block m-b-none">{{trans('gitscrum.collaborative-estimation')}}</span>
+            <span class="m-b-none">{{trans('gitscrum.collaborative-estimation')}}</span>
         </div>
-        <div class="col-sm-3"></div>
-        <label class="col-sm-2">{{trans('gitscrum.keep-adding')}}</label>
-        <div class="col-sm-2">
-            <div class="i-checks"><input id="keepAddingIssue" type="checkbox" value="" checked=""> <i></i></div>
+        <label class="col-sm-3">{{trans('gitscrum.keep-adding')}}
+            <div style="margin-left: 50px" class="col-sm-4">
+                <div class="i-checks">
+                    <input id="keepAddingIssue" type="checkbox" value="" checked="">
+                </div>
+            </div>
+        </label>
+        <div style="margin-right: 25px">
+            @include('partials.includes.form-btn-submit', ['action' => @$action])
         </div>
     </div>
     <div class="hr-line-dashed"></div>
     <div id="issueModalMessage" style="display: none;"  class="alert alert-success">
-
     </div>
-    @include('partials.includes.form-btn-submit', ['action' => @$action])
+
 </form>
 
 <script>

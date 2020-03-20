@@ -73,6 +73,11 @@ Route::group(['prefix' => 'issues', 'middleware' => ['user.authenticated', 'issu
     Route::any('/status-update/{slug?}/{status?}', 'Web\IssueController@statusUpdate')->name('issues.status.update');
 });
 
+Route::group(['prefix' => 'activities', 'middleware' => ['user.authenticated']], function () {
+    Route::post('/store', 'Web\ActivityController@store')->name('activities.store');
+    Route::get('/destroy/{id}', 'Web\ActivityController@store')->name('activities.destroy');
+});
+
 Route::group(['prefix' => 'user-issue', 'middleware' => ['user.authenticated']], function () {
     Route::get('/list/{username}/{slug_type?}/{mode?}', 'Web\UserIssueController@index')->name('user_issue.index');
     Route::post('/update/{slug}', 'Web\UserIssueController@update')->name('user_issue.update');

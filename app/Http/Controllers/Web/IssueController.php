@@ -2,6 +2,7 @@
 
 namespace GitScrum\Http\Controllers\Web;
 
+use GitScrum\Models\Activities;
 use Illuminate\Http\Request;
 use GitScrum\Contracts\SlackInterface as Slack;
 use GitScrum\Http\Requests\IssueRequest;
@@ -12,6 +13,7 @@ use GitScrum\Models\ConfigStatus;
 use Carbon\Carbon;
 use Auth;
 use GitScrum\Http\Responses\Issue\Store as IssueStoreResponse;
+use Illuminate\Support\Facades\DB;
 
 class IssueController extends Controller
 {
@@ -77,6 +79,8 @@ class IssueController extends Controller
 
     public function show($slug)
     {
+        DB::enableQueryLog();
+
         $issue = Issue::slug($slug)
             ->with('sprint')
             ->with('type')
@@ -84,11 +88,24 @@ class IssueController extends Controller
             ->with('labels')
             ->first();
 
+        $hours = Activities::where('issues_id','=',$issue->id)
+            ->get();
+
+        $activities = Activities::where('issues_id','=',$issue->id)
+            ->select('*', 'activities.description as descripition_activity' )
+            ->join('issues','activities.issues_id','=','issues.id')
+            ->join('users','activities.user_id','=','users.id')
+            ->join('notes','activities.note_id','=','notes.id')
+            ->get();
+
+//       var_dump($activities[1]->descripition_activity, DB::getQueryLog()); die("123");
+
         $usersByOrganization = Organization::find($issue->productBacklog->organization_id)->users;
 
         return view('issues.show')
             ->with('issue', $issue)
-            ->with('usersByOrganization', $usersByOrganization);
+            ->with('usersByOrganization', $usersByOrganization)
+            ->with('activities', $activities);
     }
 
     public function edit($slug)
@@ -132,7 +149,7 @@ class IssueController extends Controller
         }
 
         $request->slug = $slug;
-        
+
         resolve('IssueService')->setRequest($request)->updateStatus();
 
         $issue = Issue::slug($slug)->firstOrFail();

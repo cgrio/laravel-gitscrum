@@ -91,6 +91,10 @@
             'type'=> 'issues', 'title' => trans('gitscrum.definition-of-done-checklist'),
             'percentage' => Helper::percentage($issue, 'notes')])
 
+        @include('partials.boxes.activity', [ 'list' => $issue,
+            'type'=> 'issues', 'title' => trans('gitscrum.definition-of-done-checklist'),
+            'percentage' => Helper::percentage($issue, 'notes')])
+
         @include('partials.boxes.attachment', ['id'=>$issue->id, 'type'=>'issues', 'list' => $issue->attachments])
 
         <h4>{{trans('gitscrum.assigned-to')}}
@@ -182,9 +186,12 @@
                     {{trans('gitscrum.comments')}} ({{$issue->comments->count()}})</a></li>
                 <li class=""><a data-toggle="tab" href="#tab-commits"> {{trans('gitscrum.commits')}}
                         ({{$issue->commits->count()}})</a></li>
-                <li class=""><a data-toggle="tab" href="#tab-activities">
+                <li class=""><a data-toggle="tab" href="#tab-log">
                     <i class="fa fa-rss" aria-hidden="true"></i>
-                    {{trans('gitscrum.activities')}}</a></li>
+                    {{trans('gitscrum.log')}}</a></li>
+                <li class=""><a data-toggle="tab" href="#tab-activities">
+                        <i class="fa fa-rss" aria-hidden="true"></i>
+                        {{trans('gitscrum.activities')}}</a></li>
             </ul>
             <div class="tab-content">
                 <div id="tab-comments" class="tab-pane active">
@@ -210,10 +217,17 @@
                         </table>
                     </div>
                 </div>
+                <div id="tab-log" class="tab-pane">
+                    <div class="panel-body">
+                        <div class="feed-activity-list">
+                            @each('partials.lists.log', $issue->statuses, 'log', 'partials.lists.no-items')
+                        </div>
+                    </div>
+                </div>
                 <div id="tab-activities" class="tab-pane">
                     <div class="panel-body">
                         <div class="feed-activity-list">
-                            @each('partials.lists.activities', $issue->statuses, 'activity', 'partials.lists.no-items')
+                            @each('partials.lists.activities', $activities , 'activity', 'partials.lists.no-items')
                         </div>
                     </div>
                 </div>

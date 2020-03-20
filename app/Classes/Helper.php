@@ -2,11 +2,13 @@
 
 namespace GitScrum\Classes;
 
+use GitScrum\Models\Activities;
 use Illuminate\Pagination\LengthAwarePaginator;
 use GitScrum\Models\IssueType;
 use GitScrum\Models\ConfigIssueEffort;
 use Auth;
 use Carbon;
+use Illuminate\Support\Facades\DB;
 
 class Helper
 {
@@ -34,6 +36,21 @@ class Helper
             $totalClosed = $model->{$feature}->where('closed_at', '!=', null)->count();
 
             return ($totalClosed) ? ceil(($totalClosed * 100) / $total) : 0;
+        }
+
+        return 0;
+    }
+
+    //Calculo do Percentagem das Atividades
+
+    public static function percentage_activities($model, $feature, $issue)
+    {
+        if (isset($model->{$feature})) {
+            $sum_activities = $model->{$feature}->sum('workload');
+            $sum_hours =Activities::select(DB::raw('sum( workload ) as valor'))
+                                    ->where('issues_id','=',$issue);
+            $total = $sum_hours/$sum_activities;
+            return ($total) ? ceil(($sum_hours * 100) / $sum_activities) : 0;
         }
 
         return 0;

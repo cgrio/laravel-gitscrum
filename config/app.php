@@ -179,6 +179,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
 
+
         /*
          * Package Service Providers...
          */
@@ -197,7 +198,7 @@ return [
         SocialiteProviders\Manager\ServiceProvider::class,
         Spatie\Fractal\FractalServiceProvider::class,
         Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
-        RenatoMarinho\LaravelMultiLanguage\MultiLanguageServiceProvider::class
+        RenatoMarinho\LaravelMultiLanguage\MultiLanguageServiceProvider::class,
 
     ],
 

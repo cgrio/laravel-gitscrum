@@ -18,6 +18,7 @@ class Issue extends Model
     use IssuePresenter;
     /**
      * The database table used by the model.
+     * The database table used by the model
      *
      * @var string
      */
