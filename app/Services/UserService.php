@@ -12,11 +12,15 @@ class UserService extends Service
 {
     public function create(UserRequest $request)
     {
+
+
         $data = [
             'name' => $request->name,
             'email' => $request->email,
             'password' => $request->email,
             'active' => $request->active,
+            'provider' => $request->provider,
+            'provider_id' => $request->provider_id,
         ];
 
         $user = User::create($data);
@@ -24,8 +28,9 @@ class UserService extends Service
         return $user;
     }
 
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
+        dd($request);
         $user = User::find($request->id)->firstOrFail();
 
 

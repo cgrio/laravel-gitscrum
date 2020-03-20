@@ -23,11 +23,17 @@
         <a href="{{$user->html_url}}" target="_blank">
         <i class="fa {{ $class_avatar }}" aria-hidden="true"></i></a>  {{ $user->provider }}
     </td>
+
+<td>
+    {{ $user->active == 0? "Não":"Sim" }}
+</td>
     <td>
     @if(strtolower($user->provider) == 'local')
         <a href="/gestao/usuarios/{{$user->id}}/edit" class="btn btn-primary">Editar</a>
-       &nbsp; <a href="/gestao/usuarios/{{$user->id}}/destroy" class="btn btn-danger ml-2">Apagar</a>
-
+        <form action="{{route('usuarios.destroy',['id'=>$user->id])}}" method="POST">
+            {{method_field('DELETE')}}
+       &nbsp; <input type="submit" class="btn btn-danger ml-2" onclick="return confirm('Deseja mesmo apagar')" value="Apagar" />
+        </form>
    @endif
     </td>
 </tr>

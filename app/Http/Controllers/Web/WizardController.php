@@ -12,10 +12,10 @@ class WizardController extends Controller
     public function step1()
     {
 
-$tipo_provider = in_array(Auth::user()->provider, ['gitlab', 'github', 'gitbucket' ]); 
+$tipo_provider = in_array(Auth::user()->provider, ['gitlab', 'github', 'gitbucket' ]);
 
 
-        $repositories = $tipo_provider ? (object) app(Auth::user()->provider)->readRepositories(): null;
+        $repositories = (object) app(Auth::user()->provider)->readRepositories();
         $currentRepositories = ProductBacklog::all();
 
         Session::put('Repositories', $repositories);
@@ -29,8 +29,8 @@ $tipo_provider = in_array(Auth::user()->provider, ['gitlab', 'github', 'gitbucke
     public function step2(Request $request)
     {
 
-        $tipo_provider = in_array(Auth::user()->provider, ['gitlab', 'github', 'gitbucket' ]); 
-        if($tipo_provider){
+
+        if(strtolower(Auth::user()->provider != 'local')){
         $repositories = Session::get('Repositories')->whereIn('provider_id', $request->repos);
 
         foreach ($repositories as $repository) {

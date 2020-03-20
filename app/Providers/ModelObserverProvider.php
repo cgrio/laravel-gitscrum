@@ -28,6 +28,7 @@ use GitScrum\Observers\StatusObserver;
 use GitScrum\Observers\UserStoryObserver;
 use GitScrum\Observers\OrganizationObserver;
 
+
 class ModelObserverProvider extends ServiceProvider
 {
     public function boot()
@@ -44,6 +45,7 @@ class ModelObserverProvider extends ServiceProvider
         Status::observe(StatusObserver::class);
         UserStory::observe(UserStoryObserver::class);
         Organization::observe(OrganizationObserver::class);
+
     }
 
     public function register()

@@ -4,6 +4,7 @@ namespace GitScrum\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use GitScrum\Models\User;
+use GitScrum\Http\Requests\UserRequest;
 use GitScrum\Models\Organization;
 use Carbon\Carbon;
 use Auth;
@@ -23,30 +24,48 @@ public function __construct(){
         return view('admin.users.index')
         ->with('list', $users);
     }
-    public function store(Request $request)
-    {
-        resolve('NoteService')->create($request);
 
-        return back()->with('success', trans('gitscrum.added-successfully'));
+public function create(){
+    return view('admin.users.create')->with('action', 'Create');
+}
+
+
+
+public function edit($id){
+    $user = User::find($id);
+
+    return view('admin.users.edit')
+    ->with('user', $user)
+    ->with('action', 'Update');
+}
+
+
+
+    public function store(UserRequest $request)
+    {
+
+        User::create($request->all());
+
+        return redirect()->route('usuarios.index')->with('success', trans('gitscrum.added-successfully'));
     }
 
-    public function update(Request $request, $slug)
+    public function update(UserRequest $request,$id)
     {
-        $request->request->add([
-            'slug' => $slug
-        ]);
 
-        resolve('NoteService')->update($request);
+       $user = User::findOrFail($id);
 
-        return back()->with('success', trans('gitscrum.updated-successfully'));
+         $user->update($request->all());
+
+        return redirect()->route('usuarios.index')->with('success', trans('gitscrum.updated-successfully'));
     }
 
     public function destroy($id)
     {
-        $note = Note::find($id);
-        //->where('user_id', Auth::user()->id)->firstOrFail();
-        $note->delete();
+        $user = User::find($id);
+        $user->delete();
 
-        return back()->with('success', trans('gitscrum.deleted-successfully'));
+        //return back()->with('success', trans('gitscrum.deleted-successfully'));
+        return redirect()->route('usuarios.index')->with('success', trans('gitscrum.deleted-successfully'));
+
     }
 }

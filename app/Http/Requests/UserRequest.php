@@ -26,7 +26,7 @@ class UserRequest extends FormRequest
         return [
             'name' => 'required|min:4',
             'email' => 'email|required',
-            'active' => 'number|required',
+            'active' => 'numeric|required',
         ];
     }
 
