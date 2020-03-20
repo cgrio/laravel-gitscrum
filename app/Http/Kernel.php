@@ -57,8 +57,9 @@ class Kernel extends HttpKernel
 
         'sprint.expired' => \GitScrum\Http\Middleware\SprintExpired::class,
         'global.activities' => \GitScrum\Http\Middleware\GlobalActivities::class,
-
         'issue' => \GitScrum\Http\Middleware\IssueMiddleware::class,
         'product-backlog' => \GitScrum\Http\Middleware\ProductbacklogMiddleware::class,
+
+        'admin.authenticated' => \GitScrum\Http\Middleware\AdminAuthenticated::class,
     ];
 }

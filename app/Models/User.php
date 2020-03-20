@@ -28,7 +28,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = ['provider_id', 'provider', 'username', 'name', 'avatar', 'html_url', 'email',
-        'bio', 'location', 'blog', 'since', 'token', 'main_repository', 'position_held', 'refresh_token', ];
+        'bio', 'location', 'blog', 'since', 'token', 'main_repository', 'position_held', 'refresh_token', 'active'];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -103,10 +103,10 @@ class User extends Authenticatable
 public function authorizeRoles($roles)
 {
   if (is_array($roles)) {
-      return $this->hasAnyRole($roles) || 
+      return $this->hasAnyRole($roles) ||
              abort(401, 'This action is unauthorized.');
   }
-  return $this->hasRole($roles) || 
+  return $this->hasRole($roles) ||
          abort(401, 'This action is unauthorized.');
 }
 /**
@@ -115,7 +115,7 @@ public function authorizeRoles($roles)
 */
 public function hasAnyRole($roles)
 {
-  return null !== $this->roles()->whereIn(‘name’, $roles)->first();
+  return null !== $this->roles()->whereIn('name', $roles)->first();
 }
 /**
 * Check one role
@@ -123,6 +123,6 @@ public function hasAnyRole($roles)
 */
 public function hasRole($role)
 {
-  return null !== $this->roles()->where(‘name’, $role)->first();
+  return null !== $this->roles()->where('name', $role)->first();
 }
 }

@@ -19,7 +19,7 @@ class AdminAuthenticated
     {
 
         $request->user()->authorizeRoles(['admin']);
-          
+
 
         return $next($request);
     }

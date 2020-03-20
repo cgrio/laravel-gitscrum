@@ -112,8 +112,9 @@ class UserIssueController extends Controller
                 'url' => route('issues.show', $issue->slug),
                 'assigned_by' => Auth::user()->slack_username,
             ];
-            $slack->send($content, 1);
-
+            if(!empty(Auth::user()->slack_username)){
+                $slack->send($content, 1);
+            }
             return redirect()->back()->with('success', trans('gitscrum.updated-successfully'));
         }
     }

@@ -14,6 +14,7 @@ class UserStoryObserver
             $userStory->user_id = Auth::user()->id;
         }
 
+
         $userStory->slug = Helper::slug($userStory->title);
     }
 

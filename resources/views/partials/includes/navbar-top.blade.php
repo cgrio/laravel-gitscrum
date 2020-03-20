@@ -44,6 +44,19 @@
                                     {{trans('gitscrum.logout')}}</a></li>
                         </ul>
                     </li>
+                    <li >
+                        <a aria-expanded="false" role="button" href="#" data-toggle="dropdown">
+                            {{trans('gitscrum.gestao')}}
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/gestao/usuarios">
+                                <i class="fa fa-th" aria-hidden="true"></i>
+                                    {{trans('gitscrum.users')}}</a></li>
+                                    <li><a href="/gestao/organizations">
+                                        <i class="fa fa-th" aria-hidden="true"></i>
+                                            {{trans('gitscrum.organizations')}}</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </div>

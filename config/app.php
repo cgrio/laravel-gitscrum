@@ -137,7 +137,8 @@ return [
         'FavoriteService',
         'IssueService',
         'LabelService',
-        'NoteService'
+        'NoteService',
+        'UserService'
     ],
 
     /*
@@ -191,6 +192,7 @@ return [
         GitScrum\Providers\AuthServiceProvider::class,
         // GitScrum\Providers\BroadcastServiceProvider::class,
         GitScrum\Providers\ModelObserverProvider::class,
+        GitScrum\Providers\ObserverServiceProvider::class,
         GitScrum\Providers\EventServiceProvider::class,
         GitScrum\Providers\RouteServiceProvider::class,
         GitScrum\Providers\SlackServiceProvider::class,

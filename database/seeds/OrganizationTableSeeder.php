@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use GitScrum\Models\User;
 use GitScrum\Models\Organization;
-
 class OrganizationTableSeeder extends Seeder
 {
     /**
@@ -13,10 +13,9 @@ class OrganizationTableSeeder extends Seeder
     public function run()
     {
       $organization = new Organization();
-      $organization->provider_id = 'local';
+      $organization->title = 'Local';
       $organization->provider = 'local';
-      $organization->username = 'unisuam';
-      $organization->title    = 'UNISUAM';
+      $organization->email = 'organization@local.com';
       $organization->save();
     }
 }

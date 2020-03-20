@@ -20,7 +20,10 @@ class UserAuthenticated
         if (!Auth::user()) {
             return redirect()->route('auth.login')->with('success', trans('gitscrum.GitScrum-authentication-is-required'));
         }
+        if (Auth::user()->active == 0 && strtolower(Auth::user()->provider)== 'local') {
 
+            return redirect()->route('auth.logout')->with('success', trans('gitscrum.usuarioInativo'));
+        }
         return $next($request);
     }
 }

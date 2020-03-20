@@ -15,6 +15,6 @@ trait UserPresenter
 
     public function getProviderAttribute()
     {
-        return ucfirst($this->attributes['provider']);
+        return isset($this->attributes['provider'])?ucfirst($this->attributes['provider']):"Local";
     }
 }

@@ -148,7 +148,7 @@ Route::get('password/reset/{token}','Auth\ResetPasswordController@showResetForm'
 Route::get('register','Auth\RegisterController@showRegistrationForm')->name('register');
 
 
-Route::group(['prefix' => 'gestao', 'middleware' => ['user.authenticated']], function () {
-    Route::get('usuarios', 'Auth\WizardController@install')->name('admin.users');
-    Route::get('organization', 'Auth\WizardController@step1')->name('admin.organization');
+Route::group(['prefix' => 'gestao', 'middleware' => ['user.authenticated','admin.authenticated']], function () {
+Route::resource('usuarios', 'Admin\UserAdmController');
+Route::resource('organizations', 'Admin\OrganizationAdmController');
 });
