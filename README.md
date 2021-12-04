@@ -1,3 +1,8 @@
+Personalização do projeto original do Gitscrum. 
+
+Foram adicionadas funções de cadastro de usuários, que permite o login sem associar a contas github ou gitlab. Permitindo assim que o usuário faça a inclusão se seus próprios projetos.
+
+
 [![Project on GitScrum](https://gitscrum.com/badges/project.svg)](https://gitscrum.com)
 [![Laravel 5.4](https://img.shields.io/badge/Laravel-5.4-brightgreen.svg?style=flat-square)](http://laravel.com)
 [![Total Downloads](https://poser.pugx.org/gitscrum-community/laravel-gitscrum/downloads)](https://packagist.org/packages/gitscrum-community/laravel-gitscrum)
